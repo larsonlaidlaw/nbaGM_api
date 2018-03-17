@@ -13,7 +13,7 @@ class TeamsController < ApplicationController
         except: [:created_at, :updated_at],
         include: {
           players: {
-            except: [:created_at, :updated_at, :team_id],
+            except: [:created_at, :updated_at],
             include: {
               contracts: {
                 except: [:id, :created_at, :updated_at, :player_id],
