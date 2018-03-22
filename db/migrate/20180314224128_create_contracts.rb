@@ -4,7 +4,7 @@ class CreateContracts < ActiveRecord::Migration[5.1]
       t.date :start_date
       t.boolean :no_trade
       t.boolean :active
-      t.boolean :trade_kicker
+      t.integer :trade_kicker
       t.boolean :two_way
       t.references :player, foreign_key: true
 

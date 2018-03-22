@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20180314225058) do
     t.date "start_date"
     t.boolean "no_trade"
     t.boolean "active"
-    t.boolean "trade_kicker"
+    t.integer "trade_kicker"
     t.boolean "two_way"
     t.bigint "player_id"
     t.datetime "created_at", null: false

@@ -20,8 +20,9 @@ def make_player_slug(slug)
   slug = slug.join('_')
 end
 
+players_without_contracts = []
+
 json.each do |team|
-  # team_slug = make_team_slug(team["team_name"])
   nickname = make_team_nickname(team["team_name"])
 
   team_var = Team.create({
@@ -33,6 +34,7 @@ json.each do |team|
 
   team["players"].each do |player|
     player_slug = make_player_slug(player["name"])
+    player_slug.tr!('.', '')
 
     player_var = Player.create({
       name: player["name"],
@@ -55,7 +57,7 @@ json.each do |team|
 
     puts "#{player["name"]}'s contract added"
 
-    if player["contract"] != nil
+    if player["contract"] && player["contract"][0]
 
       player["contract"].each do |season|
         salary_var = season["salary"].split(",")
@@ -73,6 +75,17 @@ json.each do |team|
 
           puts "#{player["name"]}'s contract year #{season["season"]}added"
         end
+
+      else
+      # player["contract"] && !player["contract"][0]
+       season_var = Season.create({
+        season: "2017-2018",
+        guaranteed_salary: 1000000,
+        salary: 1000000,
+        player_option: false,
+        team_option: false,
+        contract_id: contract_var.id
+        })
       end
     end
   puts '******************************************************'
