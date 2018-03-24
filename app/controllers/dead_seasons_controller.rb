@@ -1,0 +1,2 @@
+class DeadSeasonsController < ApplicationController
+end

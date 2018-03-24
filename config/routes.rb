@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :dead_seasons
   resources :draftpicks
   resources :seasons
   resources :contracts

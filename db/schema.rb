@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314225058) do
+ActiveRecord::Schema.define(version: 20180322201634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,11 +20,25 @@ ActiveRecord::Schema.define(version: 20180314225058) do
     t.boolean "no_trade"
     t.boolean "active"
     t.integer "trade_kicker"
+    t.integer "cap_hold"
     t.boolean "two_way"
     t.bigint "player_id"
+    t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_contracts_on_player_id"
+    t.index ["team_id"], name: "index_contracts_on_team_id"
+  end
+
+  create_table "dead_seasons", force: :cascade do |t|
+    t.string "season"
+    t.integer "cap_hit"
+    t.bigint "player_id"
+    t.bigint "contract_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contract_id"], name: "index_dead_seasons_on_contract_id"
+    t.index ["player_id"], name: "index_dead_seasons_on_player_id"
   end
 
   create_table "draftpicks", force: :cascade do |t|
@@ -69,6 +83,9 @@ ActiveRecord::Schema.define(version: 20180314225058) do
   end
 
   add_foreign_key "contracts", "players"
+  add_foreign_key "contracts", "teams"
+  add_foreign_key "dead_seasons", "contracts"
+  add_foreign_key "dead_seasons", "players"
   add_foreign_key "draftpicks", "teams"
   add_foreign_key "players", "teams"
   add_foreign_key "seasons", "contracts"

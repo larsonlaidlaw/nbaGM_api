@@ -10,11 +10,9 @@ class TeamsController < ApplicationController
       .find(params[:id])
 
     render json: @team,
-      include: ['players.contracts.seasons', 'draftpicks'],
+      include: ['players.contracts.seasons', 'players.contracts.dead_seasons','draftpicks'],
       adapter: :attributes
   end
-
-
 
   # def show
   #   @team = Team.find(params[:id])

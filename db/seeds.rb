@@ -50,9 +50,11 @@ json.each do |team|
       start_date: 'Jul/1/2015',
       no_trade: false,
       trade_kicker: 1,
+      cap_hold: 0,
       active: true,
       two_way: false,
-      player_id: player_var.id
+      player_id: player_var.id,
+      team_id: team_var.id
     })
 
     puts "#{player["name"]}'s contract added"
