@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
   def index
     @players = Player.all
-    render json: @players
+    render json: @players, include: ['contracts.seasons', 'contracts.dead_seasons']
   end
 
   def show
