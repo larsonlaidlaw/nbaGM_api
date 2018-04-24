@@ -12,7 +12,7 @@ class Player < ApplicationRecord
         and contracts.id = seasons.contract_id
         group by players.id) x
         where players.id = x.p
-        and x.s = #{seasonIndex};
+        and x.s <= #{seasonIndex};
     SQL
   end
 
